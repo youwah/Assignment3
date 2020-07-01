@@ -1,0 +1,281 @@
+import java.awt.EventQueue;
+
+import javax.swing.*; 
+import java.awt.*; 
+import java.awt.event.*;
+import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException; 
+import java.io.FileReader;
+import java.io.File;
+import java.util.Scanner;
+
+public class End2 {
+
+	private JFrame frame;
+	private JLabel title;
+	private JCheckBox term; 
+	private JTextArea tout;
+	private JPanel panel_1;
+	private JLabel name;
+	private JLabel nkp;
+	private JLabel gender;
+	private JLabel addr;
+	private JTextField tname;
+	private JTextField tnkp;
+	private JRadioButton male; 
+	private JRadioButton female;
+	private ButtonGroup gengp;
+	private JTextArea tadd;
+	private JButton sub;
+	private JButton bok;
+	private JButton bok1;
+	private JLabel res;
+	private JLabel res2;
+	private JButton reset;
+	private JPanel panel_3;
+	private JTextField textField;
+	private JTextField textField_1;
+
+
+	public End2() {
+		initialize();
+	}
+
+
+	private void initialize() {
+		frame = new JFrame();
+
+	      
+	      frame.setSize(900,600);
+	      frame.setLocationRelativeTo(null);
+	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	      
+	      JPanel panel = new JPanel();
+	      frame.getContentPane().add(panel);
+         frame.setVisible(true);
+	      panel.setLayout(null);     
+	      
+	      panel_1 = new JPanel();
+	      panel_1.setBackground(new Color(255, 255, 224));
+	      panel_1.setBounds(10, 70, 477, 483);
+	      panel_1.setLayout(null);
+	      panel.add(panel_1);
+	      
+	      name = new JLabel("Name"); 
+	      name.setFont(new Font("Arial", Font.PLAIN, 20)); 
+	      name.setSize(100, 20); 
+	      name.setLocation(29, 54); 
+	      panel_1.add(name); 
+	      
+	      tname = new JTextField(); 
+	      tname.setFont(new Font("Arial", Font.PLAIN, 15)); 
+	      tname.setSize(250, 25); 
+	      tname.setLocation(200, 54); 
+	      panel_1.add(tname); 
+	      
+	      nkp = new JLabel("Number IC"); 
+	      nkp.setFont(new Font("Arial", Font.PLAIN, 20)); 
+	      nkp.setSize(100, 20); 
+	      nkp.setLocation(29, 110); 
+	      panel_1.add(nkp);
+	      
+	      tnkp = new JTextField(); 
+	      tnkp.setFont(new Font("Arial", Font.PLAIN, 15)); 
+	      tnkp.setSize(250, 25); 
+	      tnkp.setLocation(200, 110); 
+	      panel_1.add(tnkp); 
+	      
+	      gender = new JLabel("Gender"); 
+	      gender.setFont(new Font("Arial", Font.PLAIN, 20)); 
+	      gender.setSize(100, 20); 
+	      gender.setLocation(29, 167); 
+	      panel_1.add(gender); 
+
+	      male = new JRadioButton("Male"); 
+	      male.setBackground(new Color(255, 255, 224));
+	      male.setFont(new Font("Arial", Font.PLAIN, 15)); 
+	      male.setSelected(true); 
+	      male.setSize(75, 20); 
+	      male.setLocation(200, 169); 
+	      panel_1.add(male); 
+	      
+	      female = new JRadioButton("Female"); 
+	      female.setBackground(new Color(255, 255, 224));
+	      female.setFont(new Font("Arial", Font.PLAIN, 15)); 
+	      female.setSelected(false); 
+	      female.setSize(80, 20); 
+	      female.setLocation(324, 169); 
+	      panel_1.add(female); 
+	      
+	      gengp = new ButtonGroup(); 
+	      gengp.add(male); 
+	      gengp.add(female); 
+	      
+	      addr = new JLabel("Address"); 
+	      addr.setFont(new Font("Arial", Font.PLAIN, 20)); 
+	      addr.setSize(100, 20); 
+	      addr.setLocation(29, 225); 
+	      panel_1.add(addr); 
+	     
+	      tadd = new JTextArea(); 
+	      tadd.setFont(new Font("Arial", Font.PLAIN, 15)); 
+	      tadd.setSize(250, 110); 
+	      tadd.setLocation(200, 226); 
+	      tadd.setLineWrap(true); 
+	      panel_1.add(tadd); 
+	      
+	      term = new JCheckBox("Accept Terms And Conditions."); 
+	      term.setBackground(new Color(255, 255, 224));
+	      term.setFont(new Font("Arial", Font.PLAIN, 15)); 
+	      term.setSize(250, 20); 
+	      term.setLocation(200, 374); 
+	      panel_1.add(term); 
+	      
+	      sub = new JButton("Submit"); 
+	      sub.setBackground(new Color(255, 215, 0));
+	      sub.addActionListener(new ActionListener() {
+	      	public void actionPerformed(ActionEvent e) {
+	      		if (e.getSource() == sub) { 
+	      	        if (term.isSelected()) { 
+	      	            String data1; 
+	      	            String data 
+	      	               = "Name : "
+	      	               + tname.getText() + "\n"
+	      	               + "Nombor IC : "
+	      	               + tnkp.getText() + "\n"; 
+	      	            if (male.isSelected()) 
+	      	               data1 = "Gender : Male"
+	      	                     + "\n"; 
+	      	            else
+	      	               data1 = "Gender : Female"
+	      	                    + "\n"; 
+	      	            String data3 = "Address : " + tadd.getText(); 
+	      	          
+	      	          try {
+                          //output file
+	      	            BufferedWriter writer = new BufferedWriter(new FileWriter("/Users/User/Desktop/newfile1.txt"));
+
+	      	            writer.write(data + data1 + data3);
+
+	      	            writer.close();
+	      	        } catch (IOException ex) {
+	      	            
+	      	        }
+
+
+	      	            res2.setText("Registration Successfully");
+	      	            sub.setVisible(false);
+	      	            bok.setVisible(true);
+	      	            bok1.setVisible(true);
+	      	         } 
+	      	         else { 
+	      	            tout.setText(""); 
+	      	            res.setText("Please accept the"
+	      	                     + " terms & conditions.."); 
+	      	         } 
+	      	      } 
+
+	      	      else if (e.getSource() == reset) { 
+	      	         System.out.println("");
+	      	               } 
+	      	   
+	      	}
+	      });
+	      sub.setFont(new Font("Arial Black", Font.PLAIN, 15)); 
+	      sub.setSize(100, 25); 
+	      sub.setLocation(265, 431); 
+	      sub.setVisible(true);
+	      panel_1.add(sub); 
+	      
+	      res2 = new JLabel("");
+	      res2.setBounds(107, 436, 241, 35);
+	      panel_1.add(res2);
+	      res2.setFont(new Font("Arial", Font.PLAIN, 20));
+	      
+	      res = new JLabel(""); 
+	      res.setBounds(48, 419, 429, 20);
+	      panel.add(res);
+	      res.setFont(new Font("Arial", Font.PLAIN, 20));
+	          
+	      JPanel panel_2 = new JPanel();
+	      panel_2.setBackground(new Color(175, 238, 238));
+	      panel_2.setBounds(10, 10, 477, 52);
+	      panel_2.setLayout(null);
+	      panel.add(panel_2);
+	      
+	      title = new JLabel("Registration Form"); 
+	      title.setBounds(87, 10, 298, 35);
+	      panel_2.add(title);
+	      title.setFont(new Font("Arial Black", Font.PLAIN, 30));
+	      
+	      panel_3 = new JPanel();
+	      panel_3.setBackground(new Color(233, 150, 122));
+	      panel_3.setBounds(497, 10, 379, 543);
+	      panel_3.setLayout(null);
+	      panel.add(panel_3);
+	      
+	      bok = new JButton("Next"); 
+	      bok.setFont(new Font("Arial Black", Font.PLAIN, 10));
+	      bok.setBackground(new Color(255, 255, 224));
+	      bok.addActionListener(new ActionListener() {
+	      	public void actionPerformed(ActionEvent e) {
+	      		frame.dispose();
+				new End3();
+	      	}
+	      });
+	      bok.setSize(100, 25); 
+	      bok.setLocation(226, 508); 
+	      bok.setVisible(false);
+	      panel_3.add(bok);
+	      
+	      tout = new JTextArea(); 
+	      tout.setFont(new Font("Arial", Font.PLAIN, 15)); 
+	      tout.setBounds(10, 10, 359, 478); 
+	      tout.setLineWrap(true); 
+	      tout.setEditable(false); 
+	      tout.setColumns(10);
+	      panel_3.add(tout);
+	      
+	      bok1 = new JButton("Display");
+	      bok1.addActionListener(new ActionListener() {
+	      	public void actionPerformed(ActionEvent e) {
+	      		
+	      		try
+	      	    {
+	      	      File file=new File("/Users/User/Desktop/newfile1.txt");
+	      	      Scanner scan= new Scanner(file);
+	      	       String content3 = "";
+	      	       while(scan.hasNextLine()){
+	      	        content3=content3.concat(scan.nextLine() + "\n");
+	      	        tout.setText(content3);
+
+	      	            }
+
+	      	    
+	      	    }
+	      	    catch (IOException ex)  
+	      	    {
+	      	         }
+
+  	            tout.setEditable(false); 
+	      		
+	      	}
+	      });
+	      bok1.setFont(new Font("Arial Black", Font.PLAIN, 10));
+	      bok1.setBackground(new Color(255, 255, 224));
+	      bok1.setSize(100, 25); 
+	      bok1.setLocation(70, 508); 
+	      bok1.setVisible(false);
+	      panel_3.add(bok1);
+	      
+	   
+	      
+
+}
+}
