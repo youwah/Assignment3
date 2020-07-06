@@ -1,0 +1,4 @@
+Name : 
+Nombor IC : 
+Gender : Male
+Address : 
